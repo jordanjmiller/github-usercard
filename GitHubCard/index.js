@@ -122,4 +122,14 @@ followersArray.forEach((string) => {
   .then(response => {newCard(response.data)})
   .catch(error => {console.log('Error! : ' + error)});
 })
-
+  
+axios.get('https://api.github.com/users/jordanjmiller/following')
+.then(response => {console.log(response.data); 
+  response.data.forEach((user) => {
+    axios.get(apiUrl+user.login)
+    .then(response => {newCard(response.data)})
+    .catch(error => {console.log('Error! : ' + error)});
+  });
+})
+.catch(error => {console.log('Error! : ' + error)})
+  
